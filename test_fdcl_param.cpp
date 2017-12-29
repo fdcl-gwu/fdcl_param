@@ -11,6 +11,7 @@ int main(void)
 	string dev;
 	int addr;
 	Eigen::Matrix<double, 3, 3> J;
+	bool GPS;
 	
 	fdcl_param pfile;
 	
@@ -22,10 +23,17 @@ int main(void)
 	cout << "J=" << J << endl;
 	pfile.read("IMU.dev",dev);
 	cout << "dev=" << dev << endl;
+	pfile.read("GPS.available",GPS);
+	cout << "GPS=" << GPS << endl;
 
 	pfile.save("I2C.addr",50);
 	pfile.read("I2C.addr",addr);
 	cout << "addr=" << addr << endl;
+	pfile.save("GPS.available",true);
+	pfile.read("GPS.available",GPS);
+	cout << "GPS=" << GPS << endl;
+
+
 	pfile.close();
 }
 

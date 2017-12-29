@@ -31,13 +31,15 @@ public:
 	{
 		file_stream.close();
 	}
-	
+
+	void read(const string, bool&);	
 	void read(const string, double&);
 	void read(const string, int&);
 	void read(const string, string&);	
 	template<typename Derived>
 	void read(const string, Eigen::MatrixBase<Derived>& );
 	
+	void save(const string, bool);
 	void save(const string, double);
 	void save(const string, int);
 	void save(const string, const string);
@@ -159,6 +161,20 @@ void fdcl_param::read(const string param_name, int& value)
 	value=std::stoi(find_line(param_name));	
 }
 
+void fdcl_param::read(const string param_name, bool& value)
+{
+	int i;
+	i=std::stoi(find_line(param_name));	
+	if (i==0)
+		value=false;
+	else if (i==1)
+		value=true;
+	else
+		cout << "ERROR: fdcl_param::read: bool should be either 0 or 1" << endl;
+	
+}
+
+
 void fdcl_param::read(const string param_name, string& value)
 {
 	string line;
@@ -214,6 +230,19 @@ void fdcl_param::save(const string param_name, const string value)
 	new_value << "\"" << value << "\"";
 	replace_value(param_name,new_value.str());
 }
+void fdcl_param::save(const string param_name, bool value)
+{
+	int i;
+	
+	if (value==false)
+		i=0;
+	else 
+		i=1;
+
+	replace_value(param_name,std::to_string(i));
+	
+}
+
 
 template<typename Derived>
 void fdcl_param::save(const string param_name, Eigen::MatrixBase<Derived>& M)

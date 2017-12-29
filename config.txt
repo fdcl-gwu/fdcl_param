@@ -9,3 +9,5 @@ IMU:
 I2C:
 	dev: "/dev/i2c"
 	addr: 50
+GPS:
+	available: 1

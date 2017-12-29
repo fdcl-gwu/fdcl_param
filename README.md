@@ -1,10 +1,10 @@
 # fdcl_param
 
-This library provides a C++ tool to read parameters from a text file, or save them.
+This library provides a C++ tool to read parameters from a text file, or save them to a text file.
 
 ## Installation
 
-To test the example code provided in this packacge. Simply run
+To test the example code provided in this packacge, simply run
 
 ```
 make

@@ -13,7 +13,7 @@ make
 
 ### Integration to your own project
 
-This library is composed of a single header file, namely `fdcl_param.h`. You just need to copy the file to your project source folder, and include the header file.
+This library is composed of a header file, namely `fdcl_param.h` for class declarations, and `fdcl_param.cpp` for implementations. Both should be availalbe to your compiler.
 
 This library also requires the [Eigen library](http://eigen.tuxfamily.org/) as it suppors the eigen matrix types. For convenience, the eigen library is included in the package. The folder to the eigen library should be availalbe to the compiler. For example, the following makefile is used for the sample code.
 
@@ -22,8 +22,8 @@ This library also requires the [Eigen library](http://eigen.tuxfamily.org/) as i
 INCLUDE_PATH= ./eigen-3.3.4
 CFLAGS=$(foreach d, $(INCLUDE_PATH), -I$d) -Wall 
 
-test_fdcl_param:  fdcl_param.h test_fdcl_param.cpp
-	g++ -o test_fdcl_param test_fdcl_param.cpp  $(CFLAGS) 
+test_fdcl_param:  fdcl_param.h fdcl_param.cpp test_fdcl_param.cpp
+	g++ -o test_fdcl_param test_fdcl_param.cpp fdcl_param.cpp  $(CFLAGS) 
 ```
 
 
@@ -144,6 +144,21 @@ The configuration file should be closed by
 ```
 pfile.close();
 ```
+
+## Using Eigen Matrices
+
+The package supports Eigen matrices for save and read functions, which are declared as template functions. Therefore, those functions must be explicitly instantiated according to the particular type of the Eigen matrices used. 
+
+For example, the above example uses the Eigen marix type `Eigen::Matrix<double, 3, 3>`, and at the end of `fdcl_param.cpp` the following explicit istantiattion are included:
+
+```
+template void fdcl_param::read(const string param_name, Eigen::MatrixBase< Eigen::Matrix <double,3,3> >& M);
+template void fdcl_param::save(const string param_name, Eigen::MatrixBase< Eigen::Matrix <double,3,3> >& M);
+
+```
+
+When using other types or sizes of Eigen matrices, the corresponding instantiations must be included at the end of `fdcl_param.cpp`
+
 
 ## What it does NOT do
 * Save function does NOT add a new entry to the configuration text file. When the save function is called, the parameter must alred exist in the text file.

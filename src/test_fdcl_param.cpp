@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 #include "Eigen/Dense"
-#include "fdcl_param.h"
+
+#include "fdcl/param.hpp"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ int main(void)
 	Eigen::Matrix<double, 3, 3> J;
 	bool GPS;
 	
-	fdcl_param pfile;
+    fdcl::param pfile;
 	
 	pfile.open("config.txt");
 

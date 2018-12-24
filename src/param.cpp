@@ -10,7 +10,7 @@ fdcl::param::param()
 
 fdcl::param::~param()
 {
-    fdcl::param::close();
+    if (is_open) fdcl::param::close();
 }
 
 
@@ -26,6 +26,7 @@ void fdcl::param::open(std::string fname)
 
     file_name = fname;
     file_stream.open(file_name.c_str(), std::ios::in);
+    is_open = true;
 }
 
 
@@ -33,6 +34,7 @@ void fdcl::param::close()
 {
     std::cout << "PARAM: closing " << file_name << " .." << std::endl;
     file_stream.close();
+    is_open = false;
 }
 
 

@@ -35,10 +35,11 @@ class param
 {
 
 public:
-    std::string file_name; /**< name of the config file where the data is
-                            * is saved or read from
-                            */
-    std::fstream file_stream; /**< fstream object for the config file */
+    std::string file_name;  /**< name of the config file where the data is
+                             * is saved or read from
+                             */
+    std::fstream file_stream;  /**< fstream object for the config file */
+    bool is_open = false;  /**< check if the file is open */
 
     param();
     param(std::string file_name);
@@ -94,7 +95,7 @@ public:
      * @param param_name name of the parameter
      * @param value      varaiable to save the read parameter value
      */
-    void read(const std::string param_name, 
+    void read(const std::string param_name,
             Eigen::Matrix<double, 3, 3> &value);
 
 
@@ -103,7 +104,7 @@ public:
      * @param param_name name of the parameter
      * @param value      varaiable to save the read parameter value
      */
-    void read(const std::string param_name, 
+    void read(const std::string param_name,
             Eigen::Matrix<double, 4, 1> &value);
 
 
@@ -112,7 +113,7 @@ public:
      * @param param_name name of the parameter
      * @param value      varaiable to save the read parameter value
      */
-    void read(const std::string param_name, 
+    void read(const std::string param_name,
             Eigen::Matrix<double, 3, 1> &value);
 
 
@@ -134,7 +135,7 @@ public:
      */
     void save(const std::string param_name, bool value);
 
-    
+
     /** void save(const std::string param_name, double value)
      * Saves a given double type parameter to the config files
      * @param param_name name of the parameter
@@ -164,7 +165,7 @@ public:
      * @param param_name name of the parameter
      * @param value      varaiable to save the read parameter value
      */
-    void save(const std::string param_name, 
+    void save(const std::string param_name,
             Eigen::Matrix<double, 3, 3>  &value);
 
 
@@ -177,7 +178,7 @@ public:
      */
     template<typename Derived>
     void save(const std::string param_name, Eigen::MatrixBase<Derived> &value);
-    
+
 
 private:
     /** \fn std::string find_line(const std::string param_name)

@@ -22,6 +22,8 @@ fdcl::param::param(std::string file_name)
 
 void fdcl::param::open(std::string fname)
 {
+    std::cout << "PARAM: opening " << fname << " .." << std::endl;
+
     file_name = fname;
     file_stream.open(file_name.c_str(), std::ios::in);
 }
@@ -29,6 +31,7 @@ void fdcl::param::open(std::string fname)
 
 void fdcl::param::close()
 {
+    std::cout << "PARAM: closing " << file_name << " .." << std::endl;
     file_stream.close();
 }
 
@@ -57,7 +60,7 @@ std::string fdcl::param::find_line(const std::string param_name)
             }
 
             // If a group name is a space, that means it is a variable defined
-            // under some group. A parameter has the format of 
+            // under some group. A parameter has the format of
             // "parameter_name: parameter_value".
             else
             {
@@ -94,7 +97,7 @@ void fdcl::param::replace_value(const std::string param_name,
 
     file_stream.clear();
     file_stream.seekg(0,file_stream.beg);
-    
+
     // Keep checking until the variable is found
     while(std::getline(file_stream, line) && line.length() > 0)
     {
@@ -108,7 +111,7 @@ void fdcl::param::replace_value(const std::string param_name,
         }
 
         // If a group name is a space, that means it is a variable defined
-        // under some group. A parameter has the format of 
+        // under some group. A parameter has the format of
         // "parameter_name: parameter_value".
         else
         {
@@ -180,7 +183,7 @@ void fdcl::param::read(const std::string param_name, std::string &value)
 }
 
 
-void fdcl::param::read(const std::string param_name, 
+void fdcl::param::read(const std::string param_name,
         Eigen::Matrix<double, 3, 3> &M)
 {
     int i, j;
@@ -206,7 +209,7 @@ void fdcl::param::read(const std::string param_name,
 }
 
 
-void fdcl::param::read(const std::string param_name, 
+void fdcl::param::read(const std::string param_name,
         Eigen::Matrix<double, 4, 1> &M)
 {
     int i, j;
@@ -317,7 +320,7 @@ void fdcl::param::save(const std::string param_name, const std::string value)
 
 
 
-void fdcl::param::save(const std::string param_name, 
+void fdcl::param::save(const std::string param_name,
         Eigen::Matrix<double, 3, 3> &M)
 {
     int i, j;

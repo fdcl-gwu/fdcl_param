@@ -1,14 +1,15 @@
 #include "fdcl/param.hpp"
 
 
-fdcl::param::param()
+fdcl::param::param(void)
 {
     // If a file name is not defined, use 'fdcl.cfg' as the file name
+    // TODO: handle errors if the file is not found
     file_name = "fdcl.cfg";
 }
 
 
-fdcl::param::~param()
+fdcl::param::~param(void)
 {
     if (is_open) fdcl::param::close();
 }
@@ -30,7 +31,7 @@ void fdcl::param::open(std::string fname)
 }
 
 
-void fdcl::param::close()
+void fdcl::param::close(void)
 {
     std::cout << "PARAM: closing " << file_name << " .." << std::endl;
     file_stream.close();
@@ -236,6 +237,7 @@ void fdcl::param::read(const std::string param_name,
     }
 }
 
+
 void fdcl::param::read(const std::string param_name,
        Eigen::Matrix<double, 3, 1> &M)
 {
@@ -260,6 +262,7 @@ void fdcl::param::read(const std::string param_name,
         }
     }
 }
+
 
 template<typename Derived>
 void fdcl::param::read(const std::string param_name,
@@ -344,7 +347,9 @@ void fdcl::param::save(const std::string param_name,
 
 
 template<typename Derived>
-void fdcl::param::save(const std::string param_name, Eigen::MatrixBase<Derived>& M)
+void fdcl::param::save(const std::string param_name,
+    Eigen::MatrixBase<Derived>& M
+)
 {
     int i, j;
     std::stringstream new_value;

@@ -41,9 +41,9 @@ public:
     std::fstream file_stream;  /**< fstream object for the config file */
     bool is_open = false;  /**< check if the file is open */
 
-    param();
+    param(void);
     param(std::string file_name);
-    ~param();
+    ~param(void);
 
     /** \fn void open(std::string fname)
      * Open the config files for reading/ writing
@@ -52,10 +52,10 @@ public:
     void open(std::string fname);
 
 
-    /** \fn void close()
+    /** \fn void close(void)
      * Closes the config files
      */
-    void close();
+    void close(void);
 
 
     /** \fn void read(const std::string param_name, bool &value)

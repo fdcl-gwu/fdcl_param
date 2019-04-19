@@ -116,6 +116,13 @@ public:
     void read(const std::string param_name,
             Eigen::Matrix<double, 3, 1> &value);
 
+    /** \fn void read(const std::string param_name, Matrix15 &value)
+     * Reads a Matrix15 type parameter from the config file
+     * @param param_name name of the parameter
+     * @param value      varaiable to save the read parameter value
+     */
+    void read(const std::string param_name,
+            Eigen::Matrix<double, 15, 15> &value);
 
     /** \fn void read(const std::string param_name,
      *  Eigen::MatrixBase<Derived> &value)

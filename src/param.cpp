@@ -264,6 +264,32 @@ void fdcl::param::read(const std::string param_name,
 }
 
 
+void fdcl::param::read(const std::string param_name,
+       Eigen::Matrix<double, 2, 1> &M)
+{
+    int i, j;
+    std::string line;
+    std::string::size_type pos_delimiter;
+
+    line = find_line(param_name);
+    for (i = 0; i < M.rows(); i++)
+    {
+        for(j = 0; j < M.cols(); j++)
+        {
+            if((pos_delimiter = line.find(", ")) != std::string::npos)
+            {
+                M(i, j) = stod(line.substr(0, pos_delimiter));
+                line.erase(0, pos_delimiter + 1);
+            }
+            else
+            {
+                M(i, j) = stod(line);
+            }
+        }
+    }
+}
+
+
 template<typename Derived>
 void fdcl::param::read(const std::string param_name,
         Eigen::MatrixBase<Derived>& M)

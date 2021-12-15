@@ -14,7 +14,7 @@ add_library(fdcl_param STATIC ${fdcl_param_src})
 
 add_executable(test_fdcl_param src/test_fdcl_param.cpp)
 target_compile_options(test_fdcl_param
-    PRIVATE -Wall -o -O3 -std=c++11
+    PRIVATE -Wall -O3 -std=c++11
 )
 target_link_libraries(test_fdcl_param
     fdcl_param
